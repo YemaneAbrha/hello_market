@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:hello_market/pages/productadmin.dart';
 
 Future createProduct(BuildContext context, Map<String, dynamic> body) async {
-  print("I am gona create product");
+  print("I am gona b product");
   final url = "http://10.0.2.2:8000/api/createProduct";
   final id = body['owner_id'];
   body['price'] = body['price'].toString();
@@ -29,7 +29,7 @@ Future createProduct(BuildContext context, Map<String, dynamic> body) async {
   }
 }
 
-Future viewProduct(BuildContext context, int id) async {
+Future viewProduct(int id) async {
   print("I'm gona show your list of product");
   final url = 'http://10.0.2.2:8000/api/showproduct';
   print(id);
@@ -44,7 +44,24 @@ Future viewProduct(BuildContext context, int id) async {
   if (response.statusCode == 200) {
     return responseJson['products'];
   } else {
-    showDialogSingleButton(context, "You don`t have  product",
-        'Please Create At list one product to view List ', "OK");
+    // showDialogSingleButton(BuildContext context, "You don`t have  product",
+    //     'Please Create At list one product to view List ', "OK");
+  }
+}
+
+Future deleteProduct(int id) async {
+  print("am gona delete product");
+  final url = 'http://10.0.2.2:8000/api/deleteProduct';
+  print(id);
+  Map<String, dynamic> body = {
+    'id': id.toString(),
+  };
+  http.Response response = await http.post(url, body: body);
+
+  if (response.statusCode == 200) {
+    return;
+  } else {
+    // showDialogSingleButton(BuildContext context, "You don`t have  product",
+    //     'Please Create At list one product to view List ', "OK");
   }
 }

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hello_market/common/apifunctions/requestProductAPI.dart';
+import 'dart:io';
+// import 'package:image_picker/image_picker.dart';
 
 class ProductCreatePage extends StatefulWidget {
   final id;
@@ -14,7 +18,20 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
   String _titleValue;
   String _descriptionValue;
   String _category_id;
+  String fileName;
   double _priceValue;
+  File _file;
+  String base64Image;
+  // void _choose() async {
+  //   _file = await ImagePicker.pickImage(source: ImageSource.camera);
+  // }
+
+  // void _upload() {
+  //   if (_file == null) return;
+  //   base64Image = base64Encode(_file.readAsBytesSync());
+  //   fileName = _file.path.split("/").last;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -50,6 +67,24 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
         SizedBox(
           height: 10.0,
         ),
+        // Column(
+        //   children: <Widget>[
+        //     Row(
+        //       children: <Widget>[
+        //         RaisedButton(
+        //           onPressed: _choose,
+        //           child: Text("Choose Image"),
+        //         ),
+        //         SizedBox(width: 10.0),
+        //         RaisedButton(
+        //           onPressed: _upload,
+        //           child: Text('Upload Image'),
+        //         )
+        //       ],
+        //     ),
+        //     _file == null ? Text("No Image Selected") : Image.file(_file)
+        //   ],
+        // ),
         DropdownButton<String>(
           hint: new Text("Select Categories"),
           value: _category_id,

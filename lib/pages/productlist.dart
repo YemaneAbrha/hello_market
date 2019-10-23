@@ -14,10 +14,8 @@ class ProductListPage extends StatefulWidget {
 
 class _ProductListPageState extends State<ProductListPage> {
   List _blongProduct = null;
-  @override
-  void initState() {
-    super.initState();
-    Future future = viewProduct(context, widget.id);
+  void productlist() {
+    Future future = viewProduct(widget.id);
     future.then((value) {
       setState(() {
         _blongProduct = value;
@@ -26,6 +24,12 @@ class _ProductListPageState extends State<ProductListPage> {
     }).catchError((e) {
       print(e);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    productlist();
   }
 
   Widget _buildProductItem(BuildContext context, int index) {
@@ -44,6 +48,15 @@ class _ProductListPageState extends State<ProductListPage> {
           SizedBox(
             height: 10.0,
           ),
+          RaisedButton(
+              child: Text("Delete Product"),
+              onPressed: (() {
+                final id = _blongProduct[index]['id'];
+                deleteProduct(id);
+                setState(() {
+                  productlist();
+                });
+              }))
         ],
       ),
     );

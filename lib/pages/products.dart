@@ -100,6 +100,18 @@ class _ProductsPageState extends State<ProductsPage> {
                 },
               ),
               ListTile(
+                title: Text("LogIn"),
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/auth');
+                },
+              ),
+              ListTile(
+                title: Text("Register"),
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/registration');
+                },
+              ),
+              ListTile(
                 title: Text('Exit'),
                 onTap: () {
                   // Navigator.pushReplacementNamed(context, '/');
